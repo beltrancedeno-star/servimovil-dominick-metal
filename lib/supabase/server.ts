@@ -13,9 +13,11 @@ function getRequiredEnv(name: string): string {
 const supabaseUrl = getRequiredEnv("NEXT_PUBLIC_SUPABASE_URL");
 const supabasePublishableKey = getRequiredEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
 
-export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-  },
-});
+export function createSupabaseServerClient() {
+  return createClient(supabaseUrl, supabasePublishableKey, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+  });
+}
